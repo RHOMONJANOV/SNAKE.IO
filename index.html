@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #181818;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    #gameBoard {
+      position: relative;
+      width: 800px;
+      height: 800px;
+      border: 3px solid #333;
+      background: #000;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+      display: none;
+    }
+
+    .snake, .food {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .snake {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #39ff14, #23a34d);
+      box-shadow: 0 0 10px #39ff14;
+    }
+
+    .snake.head {
+      background: radial-gradient(circle, #39ff14, #0f0);
+      box-shadow: 0 0 15px #39ff14;
+    }
+
+    .food {
+      width: 10px;
+      height: 10px;
+      animation: glow 1.5s infinite alternate;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    @keyframes glow {
+      from {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      to {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    #startButton, #settingsButton, #exitButton {
+      padding: 12px 25px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 10;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+    }
+
+    #startButton:hover, #settingsButton:hover, #exitButton:hover {
+      background-color: #0056b3;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      font-family: 'Arial', sans-serif;
+      z-index: 100;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .settings-menu, .main-menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      display: block;
+      z-index: 20;
+    }
+
+    .settings-menu select, .settings-menu button {
+      margin: 10px;
+      padding: 8px 15px;
+      color: black;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .settings-menu select {
+      width: 100%;
+    }
+
+    .settings-menu button:hover {
+      background-color: #0056b3;
+    }
+
+    .settings-menu select:hover {
+      border: 1px solid #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Main Menu -->
+<div class="main-menu" id="mainMenu">
+  <h1>Snake.io</h1>
+  <button id="startButton">Start Game</button>
+  <button id="settingsButton">Settings</button>
+  <button id="exitButton">Exit</button>
+</div>
+
+<!-- Settings Menu -->
+<div class="settings-menu" id="settingsMenu" style="display: none;">
+  <h3>Settings</h3>
+  <label for="skinSelect">Choose Snake Skin:</label>
+  <select id="skinSelect">
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+    <option value="red">Red</option>
+    <option value="purple">Purple</option>
+  </select>
+  <br>
+  <button id="closeSettingsButton">Close Settings</button>
+</div>
+
+<p id="score">Score: 0</p>
+
+<div id="gameBoard"></div>
+
+<script>
+  const gameBoard = document.getElementById('gameBoard');
+  const scoreDisplay = document.getElementById('score');
+  const startButton = document.getElementById('startButton');
+  const settingsButton = document.getElementById('settingsButton');
+  const exitButton = document.getElementById('exitButton');
+  const mainMenu = document.getElementById('mainMenu');
+  const settingsMenu = document.getElementById('settingsMenu');
+  const skinSelect = document.getElementById('skinSelect');
+  const closeSettingsButton = document.getElementById('closeSettingsButton');
+
+  const boardSize = 800;
+  const cellSize = 20;
+  let snake = [
+    { x: 400, y: 400 },
+    { x: 380, y: 400 },
+    { x: 360, y: 400 },
+    { x: 340, y: 400 }
+  ];
+  let food = generateFoods(100000);
+  let direction = { x: cellSize, y: 0 };
+  let score = 0;
+  let gameInterval;
+  let snakeSkin = 'green'; // Default skin
+
+  // Start game button click event
+  startButton.addEventListener('click', () => {
+    mainMenu.style.display = 'none';
+    gameBoard.style.display = 'block'; // Show the game board
+    resetGame();
+    startGame();
+  });
+
+  // Settings button click event
+  settingsButton.addEventListener('click', () => {
+    settingsMenu.style.display = 'block';
+    mainMenu.style.display = 'none';
+  });
+
+  // Exit button click event
+  exitButton.addEventListener('click', () => {
+    window.location.reload(); // Reload the page to reset everything
+  });
+
+  // Close settings button click event
+  closeSettingsButton.addEventListener('click', () => {
+    settingsMenu.style.display = 'none';
+    mainMenu.style.display = 'block'; // Show main menu after closing settings
+  });
+
+  // Change snake skin
+  skinSelect.addEventListener('change', (event) => {
+    snakeSkin = event.target.value;
+  });
+
+  function startGame() {
+    gameInterval = setInterval(moveSnake, 200);
+  }
+
+  function generateFoods(count) {
+    const foods = [];
+    for (let i = 0; i < count; i++) {
+      foods.push({
+        x: Math.floor(Math.random() * (boardSize / cellSize)) * cellSize,
+        y: Math.floor(Math.random() * (boardSize / cellSize)) * cellSize,
+        color: getRandomColor()
+      });
+    }
+    return foods;
+  }
+
+  function getRandomColor() {
+    const colors = ['#ff3131', '#ffa500', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#ff00ff'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function draw() {
+    gameBoard.innerHTML = '';
+    snake.forEach((segment, index) => {
+      const segmentElement = document.createElement('div');
+      segmentElement.style.left = `${segment.x}px`;
+      segmentElement.style.top = `${segment.y}px`;
+      segmentElement.classList.add('snake');
+      segmentElement.style.background = getSnakeSkinColor(snakeSkin); // Dynamic skin color
+      if (index === 0) segmentElement.classList.add('head');
+      gameBoard.appendChild(segmentElement);
+    });
+
+    food.forEach(f => {
+      const foodElement = document.createElement('div');
+      foodElement.style.left = `${f.x}px`;
+      foodElement.style.top = `${f.y}px`;
+      foodElement.classList.add('food');
+      foodElement.style.backgroundColor = f.color;
+      gameBoard.appendChild(foodElement);
+    });
+  }
+
+  function getSnakeSkinColor(skin) {
+    const skins = {
+      green: 'radial-gradient(circle, #39ff34, #23a34d)',
+      blue: 'radial-gradient(circle, #00bfff, #0073e6)',
+      red: 'radial-gradient(circle, #ff4d4d, #ff0000)',
+      purple: 'radial-gradient(circle, #da70d6, #800080)'
+    };
+    return skins[skin] || skins.green;
+  }
+
+  function moveSnake() {
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+    // Check collision with food
+    food.forEach((f, index) => {
+      if (head.x === f.x && head.y === f.y) {
+        score += 1;
+        food.splice(index, 2);
+        food.push(...generateFoods(10)); // Replace eaten food
+        snake.push({ ...snake[snake.length - 1] });
+      }
+    });
+
+    // Check collision with walls
+    if (head.x < 0 || head.y < 0 || head.x >= boardSize || head.y >= boardSize) {
+      alert(`Game Over! Final score: ${score}`);
+      resetGame();
+      return;
+    }
+
+    // Check collision with itself
+    if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+      alert(`Game Over! Final score: ${score}`);
+      resetGame();
+      return;
+    }
+    
+
+    snake.unshift(head);
+    snake.pop();
+    scoreDisplay.textContent = `Score: ${score}`;
+    draw();
+  }
+
+  function resetGame() {
+    clearInterval(gameInterval);
+    score = 0;
+    snake = [
+      { x: 400, y: 400 },
+      { x: 380, y: 400 },
+      { x: 360, y: 400 },
+      { x: 340, y: 400 }
+    ];
+    food = generateFoods(5);
+    direction = { x: cellSize, y: 0 };
+    scoreDisplay.textContent = `Score: ${score}`;
+    draw();
+  }
+
+  // Handle keyboard inputs
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'w' && direction.y === 0) direction = { x: 0, y: -cellSize };
+    if (event.key === 's' && direction.y === 0) direction = { x: 0, y: cellSize };
+    if (event.key === 'a' && direction.x === 0) direction = { x: -cellSize, y: 0 };
+    if (event.key === 'd' && direction.x === 0) direction = { x: cellSize, y: 0 };
+  });
+</script>
+
+</body>
+</html>

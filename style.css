@@ -1,0 +1,837 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    height: 100vh;
+}
+
+h1 {
+    margin: 10px;
+}
+
+#gameBoard {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #333;
+    border: 2px solid #fff;
+    overflow: hidden;
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border: 1px solid #000;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+}
+#gameBoard {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+#gameBoard {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #f0f0f0;
+    border: 5px solid red; /* Qizil chegarani aniqlash */
+    margin: 0 auto;
+    box-shadow: 0 0 10px 2px red; /* Qizil yorug'lik effekti */
+    overflow: hidden;
+    animation: borderFlash 1s infinite; /* Chegara qizil rangda yonadi */
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: yellow; /* Ovqatning sariq rangi */
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+/* Chegaraning qizil animatsiyasi */
+@keyframes borderFlash {
+    0% {
+        box-shadow: 0 0 10px 2px red;
+    }
+    50% {
+        box-shadow: 0 0 20px 5px red;
+    }
+    100% {
+        box-shadow: 0 0 10px 2px red;
+    }
+}
+#gameBoard {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    overflow: hidden;
+    border: none; /* Ichki chegarani olib tashlash */
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+#gameBoard {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    overflow: hidden;
+    border: none; /* Ichki chegarani olib tashlash */
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+#gameBoard {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    overflow: hidden;
+    border: none; /* Ichki chegarani olib tashlash */
+}
+
+.snake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+#gameBoard {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    overflow: hidden;
+    border: none;
+}
+
+.snake {
+    position: absolute;
+    width: 10px;   /* Ilon segmentlari kichraytirilgan */
+    height: 10px;  /* Ilon segmentlari kichraytirilgan */
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+#gameBoard {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    overflow: hidden;
+    border: none;
+}
+
+.snake {
+    position: absolute;
+    width: 10px;   /* Ilon segmentlari kichraytirilgan */
+    height: 10px;  /* Ilon segmentlari kichraytirilgan */
+    background-color: #4caf50;
+    box-shadow: 0 0 2px #000;
+}
+
+.food {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #000;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+/* Global o'zgarishlar */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-board {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: 5px solid #000;
+    background-color: #000;
+    display: none;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.score {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.game-over {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    top: 250px;
+    left: 200px;
+}
+/* Botlar uchun */
+.bot {
+    background-color: red;
+    position: absolute;
+    border-radius: 5px;
+    transition: transform 0.1s;
+}
+
+/* Chegaralar */
+.border {
+    position: absolute;
+    background-color: red;
+    z-index: 1;
+}
+
+.border:nth-child(1) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.border:nth-child(2) {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.border:nth-child(3) {
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+}
+
+.border:nth-child(4) {
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+}
+#gameBoard {
+    border: 5px solid #333; /* O'yin chegarasi */
+    background-color: #1a1a1a;
+    position: relative;
+    margin: 50px auto;
+    width: 400px;
+    height: 400px;
+}
+
+.snake {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 50%; /* Dumaloq bo'lishi uchun */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shaffoflik effekti */
+}
+
+.food {
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Qizil rasm uchun yorug'lik effekti */
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+#menu {
+    text-align: center;
+    margin: 20px;
+}
+
+#gameBoard {
+    width: 600px;
+    height: 600px;
+    margin: 20px auto;
+    background-color: #2d2d2d;
+    border: 5px solid red;
+    position: relative; /* Relative pozitsiyani qo'shing, elementlarni o'zgaruvchan pozitsiyada joylashtrish uchun */
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 50%; /* Ikonalar uchun dumaloq chiziqlar yaratish */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Ilon va ovqatga shaffoflik berish */
+    margin: 1px; /* Qisqa oraliq */
+}
+
+.snake {
+    background-color: black;
+}
+
+.food {
+    background-color: red;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Shaffoflik va yorug'lik qo'shish */
+}
+/* O'yin maydoni */
+#gameBoard {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #f5f5f5;
+    border: 10px solid transparent;
+    border-radius: 5px;
+}
+
+/* Chegara uchun CSS */
+.border {
+    position: absolute;
+    background-color: red; /* Chegara rangini qizilga o'zgartirdik */
+    box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7); /* Qizil yongan effekt */
+    animation: borderBlink 1s infinite alternate; /* Chegara yonish effekti */
+}
+
+/* Chegara animatsiyasi */
+@keyframes borderBlink {
+    0% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Ilon segmentlari */
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border-radius: 50%;
+}
+
+/* Ovqat */
+.food {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+/* Botlar */
+.bot {
+    position: absolute;
+    background-color: blue;
+}
+
+/* Yangi Tugma */
+#startGame {
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#startGame:hover {
+    background-color: #45a049;
+}
+#gameBoard {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+}
+
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
+.bot {
+    position: absolute;
+    background-color: blue;
+}
+
+.border {
+    position: absolute;
+    background-color: red;
+}
+
+#startButton {
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+/* Umumiy o'yin maydoni */
+#gameBoard {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    background-color: #000; /* Qora fon */
+    border: 20px solid #444; /* Chegaraning stili */
+    overflow: hidden;
+}
+
+/* Chegara dizayni */
+.border {
+    position: absolute;
+    background-color: #444; /* To'q kulrang rang */
+}
+
+/* Ilon segmentining uslubi */
+.snake {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #33cc33, #009900); /* Yashil gradient */
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00; /* Yorqin effekt */
+}
+
+/* Ovqatning uslubi */
+.food {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('Снимок экрана 2024-11-21 215256.png'); /* Ovqat rasmi */
+    background-size: cover; /* Rasming o'lchamiga moslashish */
+    border-radius: 50%; /* Dumaloq shakl */
+    box-shadow: 0 0 5px #ff0000; /* Qizil yorqinlik */
+}
+
+/* Botning uslubi */
+.bot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url(''); /* Bot rasmi */
+    background-size: cover; /* Tasvirni butun maydonni qoplash uchun o'lchash */
+    border-radius: 50%; /* Dumaloq shakl */
+    box-shadow: 0 0 10px #0000ff; /* Ko'k yorqinlik */
+}
+
+.intro {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(120deg, #0f0, #00f, #ff0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: fadeOut 3s forwards; /* Avto o'chiriladi */
+    z-index: 9999;
+  }
+  
+  .intro-title {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 15px #fff, 0 0 25px #0f0;
+    animation: zoomIn 2s ease-out;
+  }
+  
+  .intro-subtitle {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 10px;
+    animation: fadeIn 3s ease-out;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+  #gameBoard {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    border: 3px solid #333;
+    background: linear-gradient(45deg, #000, #003, #005);
+    background-size: 300% 300%;
+    animation: backgroundMove 6s linear infinite;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  }
+  
+  @keyframes backgroundMove {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+  .snake {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #39ff14, #23a34d);
+    box-shadow: 0 0 10px #39ff14, 0 0 25px rgba(57, 255, 20, 0.5);
+    animation: snakeGlow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes snakeGlow {
+    from {
+      box-shadow: 0 0 15px #39ff14, 0 0 30px rgba(57, 255, 20, 0.5);
+    }
+    to {
+      box-shadow: 0 0 30px #39ff14, 0 0 50px rgba(57, 255, 20, 0.7);
+    }
+  }
+  .game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .game-over-screen h1 {
+    font-size: 3rem;
+    margin: 0;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .game-over-screen button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: fadeIn 2s ease-out;
+  }
+/* Loading ekrani */
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #000000, #1a1a1a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    z-index: 10000;
+  }
+  
+  .loading-screen h1 {
+    font-size: 3rem;
+    color: #39ff14;
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #23a34d;
+    animation: pulse 1.5s infinite;
+  }
+  
+  .loading-screen p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+    animation: fadeIn 3s infinite;
+  }
+  
+  .loading-screen span {
+    animation: dots 1.5s infinite;
+  }
+  
+  .loading-screen span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loading-screen span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  /* Animatsiyalar */
+  @keyframes pulse {
+    0%, 100% {
+      text-shadow: 0 0 15px #39ff14, 0 0 30px #23a34d;
+    }
+    50% {
+      text-shadow: 0 0 30px #39ff14, 0 0 60px #23a34d;
+    }
+  }
+  
+  @keyframes dots {
+    0%, 20% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+/* Oy animatsiyasi */
+.intro-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+  }
+  
+  .moon {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #fff, #bbb);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s infinite;
+  }
+  
+  .moon .glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 100px rgba(255, 255, 255, 0.5);
+    animation: glowEffect 4s infinite;
+  }
+  
+  @keyframes glowEffect {
+    0%, 100% {
+      box-shadow: 0 0 100px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 200px rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .intro-text {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-top: 20px;
+    animation: fadeIn 3s forwards;
+  }
+            
+
+
